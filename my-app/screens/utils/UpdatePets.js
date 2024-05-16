@@ -14,6 +14,7 @@ import BackButton from "../../components/shared/BackButton";
 import { colors } from "../../components/constants/theme";
 import axios from "axios";
 import { useAnimal } from "../../utils/AnimalContext";
+import { API_URL } from '@env';
 
 const UpdatePets = ({ navigation, route }) => {
   const { pet } = route.params;
@@ -51,7 +52,7 @@ const UpdatePets = ({ navigation, route }) => {
       formData.append("image", blob, "image.jpg");
 
       const res = await axios.put(
-        `http://localhost:5000/animals/${pet._id}`,
+        `${API_URL}/animals/${pet._id}`,
         formData,
         {
           headers: {

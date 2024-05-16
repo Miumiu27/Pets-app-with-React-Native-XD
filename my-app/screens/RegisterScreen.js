@@ -16,7 +16,7 @@ import LottieView from "lottie-react-native";
 import axios from "axios";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import { FONTS, COLORS } from "../components/constants/profil";
-
+import { API_URL } from '@env';
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -156,7 +156,7 @@ export default function RegisterScreen({ navigation }) {
       formData.append("password", password);
       formData.append("profile_image", blob, "image.jpg");
 
-      const res = await axios.post("http://localhost:5000/users", formData, {
+      const res = await axios.post(`${API_URL}/users`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { API_URL } from '@env';
 const AnimalContext = createContext();
 
 export const AnimalProvider = ({ children }) => {
@@ -11,7 +11,7 @@ export const AnimalProvider = ({ children }) => {
   useEffect(() => {
     const fetchAnimalData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/animals");
+        const response = await fetch(`${API_URL}/animals`);
         const data = await response.json();
 
         setAnimalData(data);

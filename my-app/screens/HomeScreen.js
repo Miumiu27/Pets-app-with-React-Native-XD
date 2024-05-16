@@ -16,7 +16,7 @@ import SPACING from "../components/constants/config/SPACING";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SECTION from "../components/constants/config/SECTION";
 import SearchInput from "../components/Search/SearchInput";
-
+import { API_URL } from '@env';
 const WIDTH = Dimensions.get("screen").width;
 
 const HomeScreen = ({
@@ -28,16 +28,14 @@ const HomeScreen = ({
 
   const handleDeletePet = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/animals/${id}`, {
+      const response = await fetch(`${API_URL}/animals/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
       if (response.ok) {
-        // Gérer la réponse de suppression si nécessaire
         console.log("Deleted successfully");
-        // Mettre à jour les données après la suppression
         updateAnimalData(animalData.filter((animal) => animal._id !== id));
       } else {
         console.error("Failed to delete:", response.status);
@@ -78,7 +76,7 @@ const HomeScreen = ({
                     borderRadius: SPACING * 5,
                   }}
                   source={{
-                    uri: `http://localhost:5000/${userData.profile_image.replace(
+                    uri: `${API_URL}/${userData.profile_image.replace(
                       /\\/g,
                       "/"
                     )}`,

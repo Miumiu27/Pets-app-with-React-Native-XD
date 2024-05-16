@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTS } from "../components/constants/profil";
 import { StatusBar } from "expo-status-bar";
 import { useUser } from "../utils/AuthContext";
-
+import { API_URL } from '@env';
 import { ActivityIndicator } from "react-native";
 import bg from "../assets/bg.png";
 import BackButton from "../components/shared/BackButton";
@@ -43,7 +43,7 @@ const Profile = ({ navigation }) => {
 
       <View style={{ flex: 1, alignItems: "center" }}>
         <Image
-          source={{ uri: `http://localhost:5000/${imageUrl}` }}
+          source={{ uri: `${API_URL}/${imageUrl}` }}
           resizeMode="contain"
           style={{
             height: 155,

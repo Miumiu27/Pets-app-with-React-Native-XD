@@ -18,7 +18,7 @@ import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import BackButton from "../components/shared/BackButton";
 import { useUser } from "../utils/AuthContext";
 import axios from "axios";
-
+import { API_URL } from '@env';
 const EditProfile = ({ navigation }) => {
   const { userData, updateUserData } = useUser();
 
@@ -147,7 +147,7 @@ const EditProfile = ({ navigation }) => {
   
    
       const response = await axios.put(
-        `http://localhost:5000/users/${userData._id}`,
+        `${API_URL}/users/${userData._id}`,
         formData,
         {
           headers: {

@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import FavouriteButton from "../shared/FavoriteButton"
 
+
 const CardList = ({ name, color, image }) => {
   
   return (

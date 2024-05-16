@@ -13,6 +13,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useUser } from "../utils/AuthContext";
+import { API_URL } from '@env';
 
 export default function LoginScreen({ navigation }) {
   const [form, setForm] = useState({
@@ -22,7 +23,7 @@ export default function LoginScreen({ navigation }) {
   const { updateUserData } = useUser();
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

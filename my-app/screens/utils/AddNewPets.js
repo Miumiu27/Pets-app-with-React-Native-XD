@@ -14,6 +14,7 @@ import LottieView from "lottie-react-native";
 import BackButton from "../../components/shared/BackButton";
 import { colors } from "../../components/constants/theme";
 import { useAnimal } from "../../utils/AnimalContext";
+import { API_URL } from '@env';
 
 const AddNewPets = ({ navigation }) => {
   const [image, setImage] = useState(null);
@@ -21,7 +22,7 @@ const AddNewPets = ({ navigation }) => {
   const [type, setType] = useState("");
   const [color, setColor] = useState("");
   const [description, setDescription] = useState("");
-
+ 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -54,11 +55,11 @@ const AddNewPets = ({ navigation }) => {
       formData.append("description", description);
       formData.append("image", blob, "image.jpg");
 
-      const res = await axios.post("http://localhost:5000/animals", formData, {
+      const res = await axios.post(`${API_URL}/animals`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      });
+      });;
 
       const newAnimalData = res.data;
 

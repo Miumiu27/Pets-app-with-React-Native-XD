@@ -6,7 +6,7 @@ import {
     StyleSheet,
   } from 'react-native';
  
-
+  import { API_URL } from '@env';
   import { colors } from '../constants/theme';
 import TrashButton from '../shared/TrashButton';
 
@@ -23,7 +23,7 @@ import TrashButton from '../shared/TrashButton';
         <View style={style.cardContainer}>
           <View style={style.cardImageContainer}>
             <Image
-              source={{ uri: `http://localhost:5000/${imageUrl}` }}
+              source={{ uri: `${API_URL}/${imageUrl}` }}
               style={{
                 width: '100%',
                 height: '100%',

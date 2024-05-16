@@ -62,11 +62,11 @@ export default function LoginScreen({ navigation }) {
               source={require("../assets/lottie/flash-medit.json")}
               autoPlay
               loop
-              style={{ width: 50, height: 50 }}
+              style={{ width: 300 ,height: 300 }}
             />
 
             <Text style={styles.title}>
-              Sign in to <Text style={{ color: "#075eec" }}>MyApp</Text>
+              Sign in 
             </Text>
           </View>
 

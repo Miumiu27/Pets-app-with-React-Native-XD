@@ -27,7 +27,8 @@ const FavoriteScreen = ({ navigation }) => {
   };
 
   const { favoriteItems } = useAnimal();
-  // console.log(favoriteItems);
+  console.log(favoriteItems);
+
   return (
     <View style={styles.container}>
       <MainHeader title="Favorite" navigation={navigation} />

@@ -93,7 +93,7 @@ const AddNewPets = ({ navigation }) => {
           source={require("../../assets/lottie/cat-cloud.json")}
           autoPlay
           loop
-          style={{ width: 20, height: 20 }}
+          style={{ width: 300 ,height: 300 }}
         />
       </View>
       <ScrollView

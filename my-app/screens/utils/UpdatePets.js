@@ -14,7 +14,7 @@ import BackButton from "../../components/shared/BackButton";
 import { colors } from "../../components/constants/theme";
 import axios from "axios";
 import { useAnimal } from "../../utils/AnimalContext";
-import { API_URL } from '@env';
+import { API_URL } from '@env'; 
 
 const UpdatePets = ({ navigation, route }) => {
   const { pet } = route.params;
@@ -93,7 +93,7 @@ const UpdatePets = ({ navigation, route }) => {
           source={require("../../assets/lottie/cat-cloud.json")}
           autoPlay
           loop
-          style={{ width: 20, height: 20 }}
+          style={{ width: 300 ,height: 300 }}
         />
       </View>
       <ScrollView

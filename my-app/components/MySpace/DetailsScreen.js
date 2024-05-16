@@ -11,7 +11,7 @@ import COLORS from "../constants/config/COLORS";
 import SPACING from "../constants/config/SPACING";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useAnimal } from "../../utils/AnimalContext";
-
+import { API_URL } from '@env';
 const DetailsScreen = ({ navigation, route }) => {
   const pet = route.params;
   const imageUrl = pet.image.replace(/\\/g, "/");
@@ -24,21 +24,21 @@ const DetailsScreen = ({ navigation, route }) => {
 
   const handleAddToFav = () => {
     const isFavorite = favoriteItems.some(
-      (item) => item.image === `http://localhost:5000/${imageUrl}`
+      (item) => item.image === `${API_URL}/${imageUrl}`
     );
 
     addToFav({
       id: pet._id,
       name: pet.name,
       type: pet.type,
-      image: `http://localhost:5000/${imageUrl}`,
+      image: `${API_URL}/${imageUrl}`,
       description: pet.description,
       color: pet.color,
     });
   };
 
   const favoriteIconColor = favoriteItems.some(
-    (item) => item.image === `http://localhost:5000/${imageUrl}`
+    (item) => item.image === `${API_URL}/${imageUrl}`
   )
     ? COLORS.red
     : COLORS.gray;
@@ -47,7 +47,7 @@ const DetailsScreen = ({ navigation, route }) => {
     <>
       <ScrollView>
         <ImageBackground
-          source={{ uri: `http://localhost:5000/${imageUrl}` }}
+          source={{ uri: `${API_URL}/${imageUrl}` }}
           style={{ width: "100%", height: 500 }}
         >
           <SafeAreaView>

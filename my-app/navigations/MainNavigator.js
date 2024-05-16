@@ -8,13 +8,18 @@ import RegisterScreen from "../screens/RegisterScreen";
 import Profile from "../screens/Profile";
 import EditProfile from "../screens/EditProfile";
 import UpdatePets from "../screens/utils/UpdatePets";
-import HomeScreen from "../screens/HomeScreen";
+
 
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+          options={{ headerShown: false }}
+          name="Welcome"
+          component={WelcomeScreen}
+        />
           <Stack.Screen
           options={{ headerShown: false }}
           name="TabNavigator"
@@ -46,11 +51,7 @@ const MainNavigator = () => {
           component={DetailsScreen}
         />
 
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="Welcome"
-          component={WelcomeScreen}
-        />
+     
 
         <Stack.Screen
           options={{ headerShown: false }}

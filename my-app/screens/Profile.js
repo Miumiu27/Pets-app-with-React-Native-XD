@@ -1,4 +1,5 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTS } from "../components/constants/profil";
 import { StatusBar } from "expo-status-bar";
@@ -64,8 +65,9 @@ const Profile = ({ navigation }) => {
           }}
         >
           {userData.name} {userData.firstname}
-          <hr></hr>
         </Text>
+
+        <View style={styles.hr} />
 
         <Text
           style={{
@@ -78,8 +80,9 @@ const Profile = ({ navigation }) => {
           {" "}
           <Text style={{ padding: 20 }}>Email: </Text>
           {userData.email}
-          <hr></hr>
         </Text>
+
+        <View style={styles.hr} />
 
         <Text
           style={{
@@ -91,8 +94,11 @@ const Profile = ({ navigation }) => {
         >
           {" "}
           <Text style={{ padding: 20 }}>Telephone: </Text>
-          {userData.tel} <hr></hr>
+          {userData.tel}
         </Text>
+
+        <View style={styles.hr} />
+
         <Text
           style={{
             color: COLORS.black,
@@ -100,6 +106,7 @@ const Profile = ({ navigation }) => {
             fontSize: 20,
           }}
         ></Text>
+
         <Text
           style={{
             ...FONTS.h3,
@@ -110,8 +117,10 @@ const Profile = ({ navigation }) => {
         >
           <Text style={{ padding: 20 }}>Adresse: </Text>
           {userData.adresse}
-          <hr></hr>
         </Text>
+
+        <View style={styles.hr} />
+
         <Text
           style={{
             ...FONTS.h3,
@@ -122,7 +131,7 @@ const Profile = ({ navigation }) => {
         >
           {" "}
           <Text style={{ padding: 20 }}>Prefence: </Text>
-          {userData.preference} <hr></hr>
+          {userData.preference}
         </Text>
       </View>
 
@@ -191,5 +200,14 @@ const Profile = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  hr: {
+    width: "100%",
+    height: 1,
+    backgroundColor: COLORS.primary,
+    marginVertical: 8,
+  },
+});
 
 export default Profile;

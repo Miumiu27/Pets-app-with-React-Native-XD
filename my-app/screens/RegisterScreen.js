@@ -193,10 +193,10 @@ export default function RegisterScreen({ navigation }) {
               source={require("../assets/lottie/flash-medit.json")}
               autoPlay
               loop
-              style={{ width: 50, height: 50 }}
+              style={{ width: 300, height: 300 }}
             />
             <Text style={styles.title}>
-              Sign up to <Text style={{ color: "#075eec" }}>PetsApp</Text>
+              Sign up 
             </Text>
           </View>
 

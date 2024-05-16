@@ -40,24 +40,17 @@ const UpdatePets = ({ navigation, route }) => {
 
   const handleUpdate = async () => {
     try {
+      const response = await fetch(image);
+      const blob = await response.blob();
       const formData = new FormData();
       formData.append("name", name);
       formData.append("type", type);
       formData.append("color", color);
       formData.append("description", description);
 
-      if (image) {
-        const localUri = image;
-        const filename = localUri.split("/").pop();
+      formData.append("image", blob, "image.jpg");
 
-        formData.append("image", {
-          uri: localUri,
-          name: filename,
-          type: "image/jpeg",
-        });
-      }
-
-      const response = await axios.put(
+      const res = await axios.put(
         `http://localhost:5000/animals/${pet._id}`,
         formData,
         {
@@ -67,19 +60,18 @@ const UpdatePets = ({ navigation, route }) => {
         }
       );
 
-      if (response.status !== 200) {
+      if (res.status !== 200) {
         throw new Error("Failed to update pet");
       }
 
+      const updatedPetData = res.data;
+
       updateAnimalData((prevAnimalData) =>
         prevAnimalData.map((animal) =>
-          animal._id === pet._id
-            ? { ...animal, name, type, color, description }
-            : animal
+          animal._id === pet._id ? { ...updatedPetData } : animal
         )
       );
-
-      navigation.goBack();
+      navigation.navigate("TabNavigator");
     } catch (error) {
       console.error("Update failed:", error);
       Alert.alert("Error", "Failed to update pet. Please try again.");
@@ -162,7 +154,7 @@ const UpdatePets = ({ navigation, route }) => {
               onPress={pickImage}
               style={{ marginBottom: 20, padding: 30 }}
             >
-              <Text >Choose Image</Text>
+              <Text>Choose Image</Text>
               {image && (
                 <Image
                   source={{ uri: image }}

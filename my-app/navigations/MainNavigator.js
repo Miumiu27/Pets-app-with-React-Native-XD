@@ -8,22 +8,24 @@ import RegisterScreen from "../screens/RegisterScreen";
 import Profile from "../screens/Profile";
 import EditProfile from "../screens/EditProfile";
 import UpdatePets from "../screens/utils/UpdatePets";
+import HomeScreen from "../screens/HomeScreen";
 
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
+          <Stack.Screen
+          options={{ headerShown: false }}
+          name="TabNavigator"
+          component={TabNavigator}
+        />
       <Stack.Screen
           options={{ headerShown: false }}
           name="LoginScreen"
           component={LoginScreen}
         />
-        <Stack.Screen
-          options={{ headerShown: false }}
-          name="TabNavigator"
-          component={TabNavigator}
-        />
+      
 
        
         <Stack.Screen

@@ -9,7 +9,11 @@ import bg from "../assets/bg.png";
 import BackButton from "../components/shared/BackButton";
 
 const Profile = ({ navigation }) => {
-  const { userData } = useUser();
+  const { userData , logout} = useUser();
+  const handleLogout = async () => {
+    await logout(); 
+    navigation.navigate('LoginScreen'); 
+  };
   console.log(userData);
 
   if (!userData) {
@@ -156,6 +160,30 @@ const Profile = ({ navigation }) => {
               }}
             >
               Modifier le profil
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleLogout}
+            style={{
+              marginTop : 30,
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: 30,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+              borderWidth: 1,
+              backgroundColor: "#075eec",
+              borderColor: "#075eec",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                lineHeight: 26,
+                fontWeight: "600",
+                color: "#fff",
+              }}
+            >Se déconnecter
             </Text>
           </TouchableOpacity>
         </View>

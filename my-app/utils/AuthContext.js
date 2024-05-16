@@ -23,8 +23,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      // Suppression des données utilisateur
+      await AsyncStorage.removeItem("userData");
+
+      // Suppression des éléments favoris
+      await AsyncStorage.removeItem("favoriteItems");
+
+      // Réinitialisation de l'état userData
+      setUserData(null);
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ userData, updateUserData }}>
+    <AuthContext.Provider value={{ userData, updateUserData , logout}}>
       {children}
     </AuthContext.Provider>
   );

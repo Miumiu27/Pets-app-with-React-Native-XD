@@ -41,11 +41,9 @@ exports.getAnimalById = async (req, res) => {
 exports.updateAnimalById = async (req, res) => {
   try {
     const { name, type, color, description, age, genre } = req.body;
-    let imageUrl;
-
-    // Vérifie si un fichier a été téléchargé dans la requête
+    let image;
     if (req.file) {
-      imageUrl = req.file.path;
+      image = req.file.path;
     }
 
     const updatedAnimal = await Animal.findByIdAndUpdate(
@@ -57,7 +55,7 @@ exports.updateAnimalById = async (req, res) => {
         description,
         age,
         genre,
-        imageUrl,
+        image
       },
       { new: true }
     );
@@ -71,6 +69,7 @@ exports.updateAnimalById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 exports.deleteAnimalById = async (req, res) => {
   try {

@@ -12,13 +12,14 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useUser } from "../utils/AuthContext";
 
 export default function LoginScreen({ navigation }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
+  const { updateUserData } = useUser();
   const handleSubmit = async () => {
     try {
       const response = await fetch("http://localhost:5000/login", {
@@ -32,12 +33,10 @@ export default function LoginScreen({ navigation }) {
       const data = await response.json();
 
       if (response.ok) {
-        // console.log("JWT Token:", data.token);
-        // console.log("User Data:", data.user);
-
         await AsyncStorage.setItem("token", data.token);
-
         await AsyncStorage.setItem("userData", JSON.stringify(data.user));
+
+        updateUserData(data.user);
 
         navigation.navigate("TabNavigator");
       } else {
@@ -48,6 +47,7 @@ export default function LoginScreen({ navigation }) {
       Alert.alert("Error", "An error occurred. Please try again.");
     }
   };
+
 
   const screenWidth = Dimensions.get("window").width;
   const animationWidth = screenWidth * 0.3;

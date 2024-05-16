@@ -76,6 +76,7 @@ exports.getUserById = async (req, res) => {
   }
 };
 
+
 exports.updateUserById = async (req, res) => {
   try {
     const {
@@ -87,21 +88,44 @@ exports.updateUserById = async (req, res) => {
       birthdate,
       email,
       password,
+      profile_image
     } = req.body;
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        name,
-        firstname,
-        tel,
-        adresse,
-        preference,
-        birthdate,
-        email,
-        password,
-      },
-      { new: true }
-    );
+
+
+    let updatedUser;
+    if (req.file) {
+      const imageURL = req.file.path; 
+      updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          name,
+          firstname,
+          tel,
+          adresse,
+          preference,
+          birthdate,
+          email,
+          password,
+          profile_image: imageURL 
+        },
+        { new: true }
+      );
+    } else {
+      updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        {
+          name,
+          firstname,
+          tel,
+          adresse,
+          preference,
+          birthdate,
+          email,
+          password
+        },
+        { new: true }
+      );
+    }
 
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
@@ -112,6 +136,7 @@ exports.updateUserById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 exports.deleteUserById = async (req, res) => {
   try {

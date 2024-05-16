@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-
+import { useUser } from "../utils/AuthContext";
+import { useAnimal } from "../utils/AnimalContext";
 import COLORS from "../components/constants/config/COLORS";
 import SPACING from "../components/constants/config/SPACING";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -18,12 +19,11 @@ import SearchInput from "../components/Search/SearchInput";
 
 const WIDTH = Dimensions.get("screen").width;
 
-const SpaceScreen = ({
-  navigation,
-  userData,
-  animalData,
-  updateAnimalData,
+const HomeScreen = ({
+  navigation
 }) => {
+  const { userData } = useUser();
+  const { animalData, updateAnimalData } = useAnimal();
   const [activeCategory, setActiveCategory] = useState(0);
 
   const handleDeletePet = async (id) => {
@@ -65,24 +65,26 @@ const SpaceScreen = ({
                 color: COLORS.dark,
               }}
             >
-              Bienvenue {userData.name}
+              {userData && userData.name ? `Bienvenue ${userData.name}` : "Bienvenue"}
             </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("ProfileScreen")}
             >
-              <Image
-                style={{
-                  height: SPACING * 5,
-                  width: SPACING * 5,
-                  borderRadius: SPACING * 5,
-                }}
-                source={{
-                  uri: `http://localhost:5000/${userData.profile_image.replace(
-                    /\\/g,
-                    "/"
-                  )}`,
-                }}
-              />
+              {userData && userData.profile_image && (
+                <Image
+                  style={{
+                    height: SPACING * 5,
+                    width: SPACING * 5,
+                    borderRadius: SPACING * 5,
+                  }}
+                  source={{
+                    uri: `http://localhost:5000/${userData.profile_image.replace(
+                      /\\/g,
+                      "/"
+                    )}`,
+                  }}
+                />
+              )}
             </TouchableOpacity>
           </View>
 
@@ -221,4 +223,4 @@ const SpaceScreen = ({
   );
 };
 
-export default SpaceScreen;
+export default HomeScreen;

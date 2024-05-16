@@ -11,12 +11,13 @@ import {
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
-import {  FONTS ,COLORS} from "../components/constants/profil";
+import { FONTS, COLORS } from "../components/constants/profil";
 import { colors } from "../components/constants/theme";
 import { MaterialIcons } from "@expo/vector-icons";
 import DatePicker, { getFormatedDate } from "react-native-modern-datepicker";
 import BackButton from "../components/shared/BackButton";
 import { useUser } from "../utils/AuthContext";
+import axios from "axios";
 
 const EditProfile = ({ navigation }) => {
   const { userData, updateUserData } = useUser();
@@ -26,7 +27,7 @@ const EditProfile = ({ navigation }) => {
   }
   const [password, setPassword] = useState(userData.password);
 
-  const [selectedImage, setSelectedImage] = useState(userData.profile_image);
+  const [profile_image, setProfileImage] = useState(null);
   const [name, setName] = useState(userData.name);
   const [firstname, setFirstName] = useState(userData.firstname);
   const [preference, setPreference] = useState(userData.preference);
@@ -55,14 +56,15 @@ const EditProfile = ({ navigation }) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 4],
+      aspect: [4, 3],
       quality: 1,
+      base64: false,
     });
 
     console.log(result);
 
-    if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
+    if (!result.cancelled) {
+      setProfileImage(result.assets[0].uri);
     }
   };
 
@@ -127,30 +129,35 @@ const EditProfile = ({ navigation }) => {
     );
   }
 
+
   const updateUserProfile = async () => {
     try {
-      const response = await fetch(
+      const res = await fetch(profile_image);
+      const blob = await res.blob();
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("firstname", firstname);
+      formData.append("tel", tel);
+      formData.append("adresse", adresse);
+      formData.append("preference", preference);
+      formData.append("birthdate", selectedStartDate);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("profile_image", blob, "profile_image.jpg");
+  
+   
+      const response = await axios.put(
         `http://localhost:5000/users/${userData._id}`,
+        formData,
         {
-          method: "PUT",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
-          body: JSON.stringify({
-            name,
-            firstname,
-            email,
-            password,
-            preference,
-            adresse,
-            tel,
-            profile_image: selectedImage,
-            birthdate: selectedStartDate,
-          }),
         }
       );
+  
 
-      if (response.ok) {
+      if (response.status === 200) {
         updateUserData({
           ...userData,
           name,
@@ -158,7 +165,7 @@ const EditProfile = ({ navigation }) => {
           email,
           tel,
           preference,
-          profile_image: selectedImage,
+          profile_image: profile_image,
           adresse,
           password,
           birthdate: selectedStartDate,
@@ -171,7 +178,8 @@ const EditProfile = ({ navigation }) => {
       console.error("Error:", error);
     }
   };
-
+  
+  
   return (
     <SafeAreaView
       style={{
@@ -211,9 +219,7 @@ const EditProfile = ({ navigation }) => {
           <TouchableOpacity onPress={handleImageSelection}>
             <Image
               source={{
-                uri: selectedImage
-                  ? selectedImage
-                  : `http://localhost:5000/${imageUrl}`,
+                uri: profile_image
               }}
               style={{
                 height: 170,
@@ -375,7 +381,7 @@ const EditProfile = ({ navigation }) => {
 
         <TouchableOpacity
           style={{
-            marginTop : 50,
+            marginTop: 50,
             alignItems: "center",
             justifyContent: "center",
             borderRadius: 30,

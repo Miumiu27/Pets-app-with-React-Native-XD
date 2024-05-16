@@ -35,7 +35,8 @@ const AddNewPets = ({ navigation }) => {
       setImage(result.assets[0].uri);
     }
   };
-  const { updateAnimalData } = useAnimal();
+  const { updateAnimalData, animalData } = useAnimal();
+
   const handleSubmit = async () => {
     if (!name || !type || !color || !description || !image) {
       Alert.alert("Error", "Please fill in all fields");
@@ -58,15 +59,19 @@ const AddNewPets = ({ navigation }) => {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      const newAnimalData = res.data;
+
+      updateAnimalData([...animalData, newAnimalData]);
+
       setName("");
       setColor("");
       setDescription("");
       setType("");
       setImage(null);
-      console.log(res.data);
       Alert.alert("Success", "Registration successful");
-      updateAnimalData(); 
-      navigation.navigate("Home")
+
+      navigation.navigate("Home");
     } catch (error) {
       console.error("Error creating animal:", error);
       Alert.alert("Error", "Registration failed");
@@ -152,7 +157,7 @@ const AddNewPets = ({ navigation }) => {
               onPress={pickImage}
               style={{ marginBottom: 20, padding: 30 }}
             >
-              <Text >Choose image </Text>
+              <Text>Choose image </Text>
 
               {image && (
                 <Image

@@ -6,7 +6,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { colors } from "../components/constants/theme";
 import FavoriteScreen from "../screens/FavoriteScreen";
 import AddNewPets from "../screens/utils/AddNewPets";
-import SpaceScreenContainer from "../screens/SpaceScreenContainer";
+import HomeScreen from "../screens/HomeScreen";
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
@@ -37,7 +37,7 @@ export default function TabNavigation() {
       >
         <Tab.Screen
           name="Home"
-          component={SpaceScreenContainer}
+          component={HomeScreen}
           options={{
             headerShown: false,
             tabBarIcon: ({ focused }) => (

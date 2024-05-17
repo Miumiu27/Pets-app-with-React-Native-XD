@@ -157,9 +157,8 @@ const DetailsScreen = ({ navigation, route }) => {
             </View>
           </View>
         </View>
-      </ScrollView>
-      <View
-        style={{ position: "absolute", bottom: SPACING * 2, width: "100%" }}
+        <View
+        style={{  width: "100%" }}
       >
         <TouchableOpacity
           style={{
@@ -190,6 +189,8 @@ const DetailsScreen = ({ navigation, route }) => {
           />
         </TouchableOpacity>
       </View>
+      </ScrollView>
+     
     </>
   );
 };

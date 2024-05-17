@@ -9,30 +9,27 @@ import Profile from "../screens/Profile";
 import EditProfile from "../screens/EditProfile";
 import UpdatePets from "../screens/utils/UpdatePets";
 
-
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
           name="Welcome"
           component={WelcomeScreen}
         />
-          <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
           name="TabNavigator"
           component={TabNavigator}
         />
-      <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
           name="LoginScreen"
           component={LoginScreen}
         />
-      
 
-       
         <Stack.Screen
           options={{ headerShown: false }}
           name="EditProfileScreen"
@@ -50,8 +47,6 @@ const MainNavigator = () => {
           name="DetailsScreen"
           component={DetailsScreen}
         />
-
-     
 
         <Stack.Screen
           options={{ headerShown: false }}

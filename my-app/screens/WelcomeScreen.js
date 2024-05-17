@@ -24,8 +24,10 @@ const WelcomeScreen = ({ navigation }) => {
     require("../assets/lottie/renard-nouille.json"),
   ];
 
+  const backgroundColors = ["#BE5A00", "#F9F871", "#50424F"];
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: backgroundColors[currentPage] }]}>
       <ScrollView
         horizontal
         pagingEnabled
@@ -77,7 +79,6 @@ const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgb(250,234,203)",
   },
   animationContainer: {
     width: windowWidth,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "#888",
+    backgroundColor: "#fff",
     marginHorizontal: 5,
   },
   activeDot: {

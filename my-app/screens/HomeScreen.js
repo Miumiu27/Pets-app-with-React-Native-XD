@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FlatList, ActivityIndicator } from "react-native";
+import { FlatList } from "react-native";
 import CardPets from "../components/MySpace/CardPets";
 import {
   Text,
@@ -16,12 +16,12 @@ import SPACING from "../components/constants/config/SPACING";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SECTION from "../components/constants/config/SECTION";
 import SearchInput from "../components/Search/SearchInput";
-import { API_URL } from '@env';
+import { API_URL } from "@env";
+import * as Animatable from "react-native-animatable";
+
 const WIDTH = Dimensions.get("screen").width;
 
-const HomeScreen = ({
-  navigation
-}) => {
+const HomeScreen = ({ navigation }) => {
   const { userData } = useUser();
   const { animalData, updateAnimalData } = useAnimal();
   const [activeCategory, setActiveCategory] = useState(0);
@@ -56,15 +56,20 @@ const HomeScreen = ({
               alignItems: "center",
             }}
           >
-            <Text
+            <Animatable.Text
+              animation="slideInLeft"
+              duration={1500}
               style={{
                 fontSize: SPACING * 2,
                 fontWeight: "bold",
                 color: COLORS.dark,
               }}
             >
-              {userData && userData.name ? `Bienvenue ${userData.name}` : "Bienvenue"}
-            </Text>
+              {userData && userData.name
+                ? `Bienvenue ${userData.name}`
+                : "Bienvenue"}
+            </Animatable.Text>
+
             <TouchableOpacity
               onPress={() => navigation.navigate("ProfileScreen")}
             >
@@ -189,9 +194,7 @@ const HomeScreen = ({
                 color: COLORS.dark,
                 marginBottom: SPACING * 1.4,
               }}
-            >
-              Trouve ici toutes tes animaux
-            </Text>
+            ></Text>
             <TouchableOpacity>
               <Text
                 style={{
@@ -207,12 +210,18 @@ const HomeScreen = ({
           <FlatList
             showsVerticalScrollIndicator={false}
             data={animalData}
-            renderItem={({ item }) => (
-              <CardPets
-                pet={item}
-                navigation={navigation}
-                onDelete={() => handleDeletePet(item._id)}
-              />
+            renderItem={({ item, index }) => (
+              <Animatable.View
+                animation="fadeInUp"
+                duration={1000}
+                delay={index * 200}
+              >
+                <CardPets
+                  pet={item}
+                  navigation={navigation}
+                  onDelete={() => handleDeletePet(item._id)}
+                />
+              </Animatable.View>
             )}
           />
         </View>

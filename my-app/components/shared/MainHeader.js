@@ -4,18 +4,24 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from './Icon';
 import { sizes, spacing } from '../constants/theme';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useUser } from "../../utils/AuthContext"
+import { API_URL } from '@env';
 const MainHeader = ({ title , navigation}) => {
   const insets = useSafeAreaInsets();
-
-  const userAvatar = require('../../assets/hi.jpg');
-
+  //const userAvatar = require('../../assets/hi.jpg');
+  const { userData } = useUser();
   return (
     <View style={[styles.container, { marginTop: insets.top }]}>
       <MaterialIcons name="dashboard" size={24} color="#464555" />
       <Text style={styles.title}>{title}</Text>
       <View style={styles.notificationContainer}>
         {/* Afficher l'avatar de l'utilisateur */}
-        <TouchableOpacity onPress={() => navigation.navigate("ProfileScreen")}><Image source={userAvatar} style={styles.avatar} /></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("ProfileScreen")}><Image   source={{
+                    uri: `${API_URL}/${userData.profile_image.replace(
+                      /\\/g,
+                      "/"
+                    )}`,
+                  }} style={styles.avatar} /></TouchableOpacity>
         
         <Icon icon="Notification" onPress={() => {}} />
       </View>

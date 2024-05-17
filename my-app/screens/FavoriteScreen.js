@@ -32,7 +32,7 @@ const FavoriteScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <MainHeader title="Favorite" navigation={navigation} />
-      <ScreenHeader mainTitle="Find here" secondTitle="your favourite pets" />
+      <ScreenHeader mainTitle="Find here" secondTitle="your favorite pets" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <TopPetsCarousel list={TOP_PETS} />
         <SectionHeader

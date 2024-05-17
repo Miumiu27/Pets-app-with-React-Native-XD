@@ -1,19 +1,25 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTS } from "../components/constants/profil";
 import { StatusBar } from "expo-status-bar";
 import { useUser } from "../utils/AuthContext";
-import { API_URL } from '@env';
+import { API_URL } from "@env";
 import { ActivityIndicator } from "react-native";
 import bg from "../assets/bg.png";
 import BackButton from "../components/shared/BackButton";
 
 const Profile = ({ navigation }) => {
-  const { userData , logout} = useUser();
+  const { userData, logout } = useUser();
   const handleLogout = async () => {
-    await logout(); 
-    navigation.navigate('LoginScreen'); 
+    await logout();
+    navigation.navigate("LoginScreen");
   };
   console.log(userData);
 
@@ -58,7 +64,7 @@ const Profile = ({ navigation }) => {
 
         <Text
           style={{
-            fontSize:20,
+            fontSize: 20,
             color: COLORS.primary,
             marginVertical: 8,
             fontWeight: "bold",
@@ -67,8 +73,6 @@ const Profile = ({ navigation }) => {
           {userData.name} {userData.firstname}
         </Text>
 
-        <View style={styles.hr} />
-
         <Text
           style={{
             ...FONTS.h3,
@@ -78,12 +82,10 @@ const Profile = ({ navigation }) => {
           }}
         >
           {" "}
-          <Text style={{ padding: 20 }}>Email: </Text>
+          <Text style={{ padding: 20 ,fontWeight: "bold",}}>Email: </Text>
           {userData.email}
         </Text>
 
-        <View style={styles.hr} />
-
         <Text
           style={{
             ...FONTS.h3,
@@ -93,20 +95,11 @@ const Profile = ({ navigation }) => {
           }}
         >
           {" "}
-          <Text style={{ padding: 20 }}>Telephone: </Text>
+          <Text style={{ padding: 20, fontWeight: "bold",}}>Telephone: </Text>
           {userData.tel}
         </Text>
 
-        <View style={styles.hr} />
-
-        <Text
-          style={{
-            color: COLORS.black,
-            ...FONTS.body4,
-            fontSize: 20,
-          }}
-        ></Text>
-
+    
         <Text
           style={{
             ...FONTS.h3,
@@ -115,11 +108,9 @@ const Profile = ({ navigation }) => {
             marginVertical: 6,
           }}
         >
-          <Text style={{ padding: 20 }}>Adresse: </Text>
+          <Text style={{ padding: 20 ,fontWeight: "bold",}}>Adresse: </Text>
           {userData.adresse}
         </Text>
-
-        <View style={styles.hr} />
 
         <Text
           style={{
@@ -130,72 +121,66 @@ const Profile = ({ navigation }) => {
           }}
         >
           {" "}
-          <Text style={{ padding: 20 }}>Prefence: </Text>
+          <Text style={{ padding: 20,fontWeight: "bold", }}>Prefence: </Text>
           {userData.preference}
         </Text>
       </View>
 
       <View
-        style={{
-          paddingVertical: 8,
-          marginLeft: -20,
-          marginBottom: 50,
-          flexDirection: "row",
-        }}
+        style={{ flexDirection: "column", marginLeft: 50, marginRight: 50 }}
       >
-        <View style={{ flexDirection: "row", marginLeft: 130 }}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate("EditProfileScreen");
-            }}
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("EditProfileScreen");
+          }}
+          style={{
+            marginTop: 30,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 30,
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            borderWidth: 1,
+            backgroundColor: "#075eec",
+            borderColor: "#075eec",
+          }}
+        >
+          <Text
             style={{
-              marginTop : 30,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 30,
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              borderWidth: 1,
-              backgroundColor: "#075eec",
-              borderColor: "#075eec",
+              fontSize: 18,
+              lineHeight: 26,
+              fontWeight: "600",
+              color: "#fff",
             }}
           >
-            <Text
-              style={{
-                fontSize: 18,
-                lineHeight: 26,
-                fontWeight: "600",
-                color: "#fff",
-              }}
-            >
-              Modifier le profil
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleLogout}
+            Modifier le profil
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleLogout}
+          style={{
+            marginTop: 30,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 30,
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            borderWidth: 1,
+            backgroundColor: "#075eec",
+            borderColor: "#075eec",
+          }}
+        >
+          <Text
             style={{
-              marginTop : 30,
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 30,
-              paddingVertical: 10,
-              paddingHorizontal: 20,
-              borderWidth: 1,
-              backgroundColor: "#075eec",
-              borderColor: "#075eec",
+              fontSize: 18,
+              lineHeight: 26,
+              fontWeight: "600",
+              color: "#fff",
             }}
           >
-            <Text
-              style={{
-                fontSize: 18,
-                lineHeight: 26,
-                fontWeight: "600",
-                color: "#fff",
-              }}
-            >Se déconnecter
-            </Text>
-          </TouchableOpacity>
-        </View>
+            Se déconnecter
+          </Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

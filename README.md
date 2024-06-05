@@ -1,5 +1,4 @@
-ToT Pets Management 🐾😻
-Welcome to the wonderful world of ToT Pets Management! 🎉✨
+�Welcome to the wonderful world of ToT Pets Management! 🎉✨
 
 This project is lovingly crafted using Expo and JavaScript. It also includes awesome libraries like Lottie for stunning animations and React-Icons for a sparkling interface! 🚀🌟
 
